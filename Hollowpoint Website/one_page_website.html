@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+	<html lang="en">
+		<head>
+			<title>HOLLOWPOINT</title>
+			<meta charset="utf-8">
+			<meta name="viewport" content="width=device-width, initial-scale=1">
+			<link rel="stylesheet" type ="text/css" href="./CSS/one_page_website.css">
+			<script src="JS/one_page_website.js" defer></script>
+		</head>
+		
+
+		<body>
+			<!--Navigation-->
+			<div class="Navbar">
+				<a class="active" href="#bio">Bio</a>
+				<a href="#gallery">Gallery</a>
+				<a href="#video">Videos</a>
+				<a href="#contact">Contact</a>
+			</div>	
+			<!--End Navigation-->
+			
+			<!--Bio-->
+			<div id="bio">
+				<br>
+				<br>
+				<br>
+				<br>
+				<div class="main">
+					<img src=./pictures/hollowpoint_logo.png alt="logo">
+				</div>
+				<h1>Bio<br></h1>
+				<p>Hollowpoint was a heavy metal band based out of Pittsburgh, PA.
+				<br>The band existed from 2008 to 2012 and recorded two albums.
+				<br>The first album was a self-titled EP released in 2009.
+				<br>The second album was entitled "Of Grace and Pain" and was released in 2011.
+				<br>
+				<h2>Members</h2>
+					<p>Jon Cooper - vocals
+					<br>Wesley South - guitar
+					<br>Kenny Boeh - guitar
+					<br>Kevin Coleman - drums
+					<br>Ryan Zuniga - bass
+					</p>
+			</div>
+			<!--End Bio-->
+			
+			<!--Gallery-->
+			<div id="gallery">
+				<br>
+				<br>
+				<h1>Gallery<br></h1>
+				<div class="picture">
+					<div class="row">
+						<div class="column">
+				  			<img src="./pictures/thumb/thumb_1.png" onclick="openModal();currentSlide(1)" class="hover-shadow">
+						</div>
+						<div class="column">
+				  			<img src="./pictures/thumb/thumb_2.png" onclick="openModal();currentSlide(2)" class="hover-shadow">
+						</div>
+						<div class="column">
+				  			<img src="./pictures/thumb/thumb_3.png" onclick="openModal();currentSlide(3)" class="hover-shadow">
+						</div>
+					</div>	
+					<br>
+					<div class="row">	
+						<div class="column">
+				  			<img src="./pictures/thumb/thumb_4.png" onclick="openModal();currentSlide(4)" class="hover-shadow">
+						</div>
+						<div class="column">
+							<img src="./pictures/thumb/thumb_5.png" onclick="openModal();currentSlide(5)" class="hover-shadow">
+						</div>
+						<div class="column">
+							<img src="./pictures/thumb/thumb_6.png" onclick="openModal();currentSlide(6)" class="hover-shadow">
+						</div>
+					</div>
+					<br>
+					<div class="row">
+						<div class="column">
+				  			<img src="./pictures/thumb/thumb_7.png" onclick="openModal();currentSlide(7)" class="hover-shadow">
+						</div>
+						<div class="column">
+				  			<img src="./pictures/thumb/thumb_8.png" onclick="openModal();currentSlide(8)" class="hover-shadow">
+						</div>
+						<div class="column">
+				  			<img src="./pictures/thumb/thumb_9.png" onclick="openModal();currentSlide(9)" class="hover-shadow">
+						</div>
+					</div>
+				</div>
+
+				<!-- The Modal/Lightbox -->
+				<div id="myModal" class="modal">
+					<span class="close cursor" onclick="closeModal()">&times;</span>
+					<div class="modal-content">
+  
+	  				<div class="mySlides">
+						<div class="numbertext">1 / 9</div>
+						<img src="./pictures/thumb/thumb_1.png" style="width:100%">
+	  				</div>
+  
+	  				<div class="mySlides">
+						<div class="numbertext">2 / 9</div>
+						<img src="./pictures/thumb/thumb_2.png" style="width:100%">
+	  				</div>
+  
+	  				<div class="mySlides">
+						<div class="numbertext">3 / 9</div>
+						<img src="./pictures/thumb/thumb_3.png" style="width:100%">
+	  				</div>
+  
+	  				<div class="mySlides">
+						<div class="numbertext">4 / 9</div>
+						<img src="./pictures/thumb/thumb_4.png" style="width:100%">
+	  				</div>
+
+	  				<div class="mySlides">
+						<div class="numbertext">5 / 9</div>
+						<img src="./pictures/thumb/thumb_5.png" style="width:100%">
+	  				</div>
+  
+	  				<div class="mySlides">
+						<div class="numbertext">6 / 9</div>
+						<img src="./pictures/thumb/thumb_6.png" style="width:100%">
+	  				</div>
+  
+	  				<div class="mySlides">
+						<div class="numbertext">7 / 9</div>
+						<img src="./pictures/thumb/thumb_7.png" style="width:100%">
+	  				</div>
+  
+	  				<div class="mySlides">
+						<div class="numbertext">8 / 9</div>
+						<img src="./pictures/thumb/thumb_8.png" style="width:100%">
+	  				</div>
+
+	  				<div class="mySlides">
+						<div class="numbertext">9 / 9</div>
+						<img src="./pictures/thumb/thumb_9.png" style="width:100%">
+	  				</div>
+  
+	  				<!-- Next/previous controls -->
+	  				<a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+	  				<a class="next" onclick="plusSlides(1)">&#10095;</a>
+  
+	  				<!-- Caption text -->
+	  				<div class="caption-container">
+						<p id="caption"></p>
+	  				</div>
+  
+	  				<!-- Thumbnail image controls -->
+	  				<div class="column">
+						<img class="demo" src="./pictures/thumb/thumb_1.png" onclick="currentSlide(1)" alt="Band" width="95%">
+	  				</div>
+  
+	  				<div class="column">
+						<img class="demo" src="./pictures/thumb/thumb_2.png" onclick="currentSlide(2)" alt="Audience" width="95%">
+	  				</div>
+  
+	  				<div class="column">
+						<img class="demo" src="./pictures/thumb/thumb_3.png" onclick="currentSlide(3)" alt="Wes and Ryan" width="95%">
+	  				</div>
+  
+	  				<div class="column">
+						<img class="demo" src="./pictures/thumb/thumb_4.png" onclick="currentSlide(4)" alt="Kenny" width="95%">
+					  </div>
+					  
+					  <div class="column">
+						<img class="demo" src="./pictures/thumb/thumb_5.png" onclick="currentSlide(5)" alt="Ryan, Kevin and Jon" width="95%">
+	  				</div>
+  
+	  				<div class="column">
+						<img class="demo" src="./pictures/thumb/thumb_6.png" onclick="currentSlide(6)" alt="Kevin" width="95%">
+	  				</div>
+  
+	  				<div class="column">
+						<img class="demo" src="./pictures/thumb/thumb_7.png" onclick="currentSlide(7)" alt="Jon" width="95%">
+	  				</div>
+  
+	  				<div class="column">
+						<img class="demo" src="./pictures/thumb/thumb_8.png" onclick="currentSlide(8)" alt="Wes and Ryan" width="95%">
+					  </div>
+					  
+					  <div class="column">
+						<img class="demo" src="./pictures/thumb/thumb_9.png" onclick="currentSlide(9)" alt="Ryan and Jon" width="95%">
+	  				</div>
+				</div>
+  			</div>
+			
+			<!--Video-->
+			<div id="video">
+				<br>
+				<br>
+				<br>
+				<br>
+				<h1>Videos<br></h1>
+				<p>"Blister" off the full length "Of Grace and Pain"<br></p>
+				<iframe width="560" height="315" src="https://www.youtube.com/embed/Gf9a1U4BRs0" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+				<p>Live at The Firehouse in Gaithersburg, MD<br></p>
+				<iframe width="560" height="315" src="https://www.youtube.com/embed/DjJpb8aOwJU" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+				<p>Live at Balls Bluff Tavern in Leesburg, VA<br></p>
+				<iframe width="560" height="315" src="https://www.youtube.com/embed/x-02iQNtuSs" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+			</div>
+			<!--End Video-->
+			
+			<!--Contact-->
+			<div id="contact">
+				<br>
+				<br>
+				<br>
+				<br>
+				<h1>Contact<br></h1>
+				<p>Fill out the below form to recieve a free download of either or both of our albums!</p>
+				<form name="myForm" action="" onsubmit="return validateForm()" method="post">
+					<label>First Name:</label><br>
+					<input type="text" name="fname"><br><br>
+					<label>Last Name:</label><br>
+					<input type="text" name="lname"><br><br>
+					<label>Email:</label><br>
+					<input type="text" name="email"><br><br>
+					<input type="submit" value="Submit">
+				  </form>
+				</div>
+			<!--End Contact-->
+		</body>
+		
+		<footer>
+			<br><br><br> www.hollowpoint.pgh | &copy;2012</p>
+		</footer>
+	</html>
+		
