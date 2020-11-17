@@ -1,0 +1,12 @@
+C:\Users\jonre\Desktop\BlackJack\Casino\bin\Debug\Casino.dll
+C:\Users\jonre\Desktop\BlackJack\Casino\bin\Debug\Casino.pdb
+C:\Users\jonre\Desktop\BlackJack\Casino\obj\Debug\Casino.csprojAssemblyReference.cache
+C:\Users\jonre\Desktop\BlackJack\Casino\obj\Debug\Casino.csproj.CoreCompileInputs.cache
+C:\Users\jonre\Desktop\BlackJack\Casino\obj\Debug\Casino.dll
+C:\Users\jonre\Desktop\BlackJack\Casino\obj\Debug\Casino.pdb
+C:\Users\jonre\Desktop\Basic_C#_Programs\BlackJack\Casino\bin\Debug\Casino.dll
+C:\Users\jonre\Desktop\Basic_C#_Programs\BlackJack\Casino\bin\Debug\Casino.pdb
+C:\Users\jonre\Desktop\Basic_C#_Programs\BlackJack\Casino\obj\Debug\Casino.csproj.CoreCompileInputs.cache
+C:\Users\jonre\Desktop\Basic_C#_Programs\BlackJack\Casino\obj\Debug\Casino.dll
+C:\Users\jonre\Desktop\Basic_C#_Programs\BlackJack\Casino\obj\Debug\Casino.pdb
+C:\Users\jonre\Desktop\Basic_C#_Programs\BlackJack\Casino\obj\Debug\Casino.csprojAssemblyReference.cache

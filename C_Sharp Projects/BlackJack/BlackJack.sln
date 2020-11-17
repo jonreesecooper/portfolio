@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30611.23
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlackJack", "BlackJack.csproj", "{68537294-8B01-4D6E-85D5-8CF34C992170}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Casino", "Casino\Casino.csproj", "{E5C3EF0C-E866-4E97-B634-431913252752}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{68537294-8B01-4D6E-85D5-8CF34C992170}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{68537294-8B01-4D6E-85D5-8CF34C992170}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{68537294-8B01-4D6E-85D5-8CF34C992170}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{68537294-8B01-4D6E-85D5-8CF34C992170}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E5C3EF0C-E866-4E97-B634-431913252752}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E5C3EF0C-E866-4E97-B634-431913252752}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E5C3EF0C-E866-4E97-B634-431913252752}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E5C3EF0C-E866-4E97-B634-431913252752}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {EC2DAF39-DBB8-4197-8E21-24BAEB570668}
+	EndGlobalSection
+EndGlobal

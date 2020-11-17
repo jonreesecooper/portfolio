@@ -1,0 +1,274 @@
+* {
+    box-sizing: border-box;
+}
+/*General page styling*/
+body {
+	background-color: black;
+	font-family: 'Times New Roman', Times, serif;
+	text-align: center;
+	color: red;
+}
+
+p {
+	font-size: 25px;
+}
+
+h1 {
+	font-size: 50px;
+	text-decoration: underline;
+}
+/*Navbar styling*/
+.Navbar {
+	display: block;
+	align-items: center;
+    overflow: hidden;
+    background-color: red;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1;
+    border: 1px solid black;
+}
+
+.Navbar a{
+    float: left;
+    display: block;
+    color: black;
+    padding: 14px 16px;
+    text-decoration: none;
+	font-family: 'Times New Roman', Times, serif;
+    font-size: 20px;
+    text-align: center;
+}
+
+.Navbar a:hover {
+    background-color: black;
+    color: red;
+    font-weight: bold;
+}
+
+/*video positioning*/
+iframe {
+	width: 500px;
+	height: 250px;
+	margin: 0 auto;
+	display: block;
+}
+
+/*Contact styling*/
+input[type=text] {
+    font-size: 20px;
+    font-weight: bold;
+    border: 10px solid black;
+    border-radius: 8px;
+    width: 50%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    box-sizing: border-box;
+    border: 2px inset grey;
+    background-color:red;
+    color: black;
+}
+
+input[type=text]:hover {
+    color: black;
+    background-color: grey;
+    border: 2px inset red;
+    border-radius: 8px;
+    font-weight: bold;
+    font-size: 20px;
+}
+
+
+input[type=button], input[type=submit], input[type=reset] {
+    border: 2px inset grey;
+    border-radius: 8px;
+    font-size: 20px;
+    font-weight: bold;
+    background-color: red;
+    color: black;
+    padding: 16px 32px;
+    text-decoration: none;
+    margin: 0 auto;
+    cursor: pointer;
+    display: block;
+}
+
+input[type=button]:hover, input[type=submit]:hover, input[type=reset]:hover {
+	  color: black;
+      background-color: grey;
+      border: 2px inset red;
+      border-radius: 8px;
+}
+
+label {
+	color: red;
+	font-size: 30px;
+	font-weight: bold;
+	text-align: center;
+	display: block;
+}
+
+div.contact {
+    padding: 20px;
+    width: 33%;
+}
+
+  
+.row:after {
+	content: "";
+	display: table;
+	clear: both;
+}
+  
+/* Create three equal columns that floats next to eachother */
+.column {
+	float: left;
+	width: 33%;
+}
+  
+/* The Modal (background) */
+.modal {
+	display: none;
+	position: fixed;
+	z-index: 1;
+	padding-top: 100px;
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 100%;
+	overflow: auto;
+	background-color: black;
+}
+  
+/* Modal Content */
+.modal-content {
+	position: relative;
+	background-color: #fefefe;
+	margin: auto;
+	padding: 0;
+	width: 90%;
+	max-width: 500px;
+}
+  
+/* The Close Button */
+.close {
+	color: red;
+	position: absolute;
+	top: 10px;
+	right: 25px;
+	font-size: 35px;
+	font-weight: bold;
+}
+  
+.close:hover,
+.close:focus {
+	color: #999;
+	text-decoration: none;
+	cursor: pointer;
+}
+  
+/* Hide the slides by default */
+.mySlides {
+	display: none;
+}
+  
+/* Next & previous buttons */
+.prev,
+.next {
+	cursor: pointer;
+	position: absolute;
+	top: 50%;
+	width: auto;
+	padding: 16px;
+	margin-top: -50px;
+	color: red;
+	font-weight: bold;
+	font-size: 20px;
+	transition: 0.6s ease;
+	border-radius: 0 3px 3px 0;
+	user-select: none;
+	-webkit-user-select: none;
+}
+  
+/* Position the "next button" to the right and prev button to the left*/
+.next {
+	right: 0;
+	border-radius: 3px 0 0 3px;
+}
+  
+.prev {
+	left: 0;
+	border-radius: 3px 0 0 3px;
+}
+  
+/* On hover, add a black background color with a little bit see-through */
+.prev:hover,
+.next:hover {
+	background-color: rgba(0, 0, 0, 0.8);
+}
+  
+/* Number text (1/9 etc) */
+.numbertext {
+	color: red;
+	font-size: 12px;
+	padding: 8px 12px;
+	position: absolute;
+	top: 0;
+}
+  
+/* Caption text */
+.caption-container {
+	text-align: center;
+	background-color: black;
+	padding: 2px 16px;
+	color: red;
+}
+  
+img.demo {
+	opacity: 0.6;
+}
+  
+.active,
+.demo:hover {
+	opacity: 1;
+}
+  
+img.hover-shadow {
+	transition: 0.3s;
+}
+  
+.hover-shadow:hover {
+	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+/* hover and border affect for pictures on main page only, not affecting lightbox*/
+.picture img {
+	border: 2px solid red;
+	border-radius: 8px;
+	padding: 5px;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+
+.picture img:hover {
+    transition: transform 1s;
+	transform: scale(1.1);
+}
+
+/*footer styling*/
+footer {
+	color: red;
+	text-align: right;
+	font-family: 'Times New Roman', Times, serif;
+}
+
+/* border and spacing for main photo*/
+.main img{
+	border: 2px solid red;
+	border-radius: 8px;
+	padding: 5px;
+	margin-left: auto;
+	margin-right: auto;	
+}

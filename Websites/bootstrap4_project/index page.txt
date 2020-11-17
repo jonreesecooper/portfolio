@@ -1,0 +1,32 @@
+{% extends 'RickAndMorty/RickAndMorty_base.html' %}
+{% load static %}
+
+{% block title %} Index of Characters {% endblock %}
+{% block page-title %}Index of Characters{% endblock %}
+{% block button1 %}<br><br><a href=" {% url 'RickAndMorty_home' %}"><button class="button1" type="submit"><strong>Home</strong></button></a>{% endblock %}
+{% block button2 %}<a href="{% url 'add_character' %}"><button class="button1" type="submit"><strong>Add</strong></button></a>{% endblock %}
+
+{% block appcontent %}
+<section class="welcome" >
+    <div class="container center_div">
+        <h3 class="formheader">Index of Characters:</h3>
+        <div>
+        <table class="index_table">
+            <tr>
+                <th>Character Name</th>
+                <th>Character Alignment</th>
+                <th>Catch Phrase</th>
+            </tr>
+            {% for stat in stats %}
+            <tr>
+                <td>{{stat.name}}</td>
+                <td>{{stat.alignment}}</td>
+                <td>{{stat.catchPhrase}}</td>
+            </tr>
+            {% endfor %}
+        </table>
+        </div>
+    </div>
+</section>
+
+{% endblock %}

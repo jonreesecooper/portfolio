@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Jonathan Cooper</title>
+        <link rel="stylesheet" type="text/css" href="./css/portfolio.css">
+    </head>
+    <!--Body-->
+    <body class="Background">
+        <!--Navbar-->
+        <div class="Navbar">
+            <a class="active" href="#Home">Home</a>
+            <a href="#Slideshow">Slideshow</a>
+            <a href="#About">About</a>
+            <a href="#GitHub">GitHub</a>
+            <a href="#Linkedin">LinkedIn</a>
+            <a onclick="openForm()" ondblclick="closeForm()">Contact</a>
+        </div>
+        <!--Home-->
+            <br>
+            <br>
+        
+        <!--Video-->
+        <div id="Home">
+            <video autoplay muted loop id="Typing_Video">
+                <source src="./css/video/video.mp4" type="video/mp4">
+                Your browser does not support HTML5 video.
+            </video>
+        </div>
+
+        <!--Video text-->
+        <div class="Video_Text">
+            <h1 style="color:white;">Jonathan Cooper's Portfolio</h1>
+                <p>
+                    <strong>
+                        <center>
+                            <q>Truth can only be found in one place: the code.
+                            </q>
+                            <br>-Robert C. Martin<br>
+                            <br>
+                            <q>In order to be irreplaceable, one must always be different.</q>
+                            <br>-Coco Chanel<br>
+                            <br>
+                            My name is Jonathan Cooper.  &nbsp;Welcome to my portfolio website.  &nbsp;This is the hub for all my background and experience.<br>
+                            <br>Thank you for stopping by and enjoy!<br>
+                        </center>
+                    </strong>
+                </p>
+        </div>
+
+        <!--Slideshow section-->
+        <div id="Slideshow">
+            <div id="Slideshow_Background">
+                <div id="Slideshow_Container">
+                    <div class="mySlides fade">
+                        <div class="Slides_Number">1 / 5</div>
+                        <img class="Slide_Show_Images" src="./css/img/jon.jpg" alt="image not found" style="width:100%">
+                            <div class="text">I'm available to assist you on your project!</div>
+                    </div>
+                    <div class="mySlides fade">
+                        <div class="Slides_Number">2 / 5</div>
+                        <img class="Slide_Show_Images" src="./css/img/HTML_CSS_and_JavaScript.jpeg" alt="image not found" style="width:100%">
+                            <div class="text">I am a full-stack software developer,<br> trained in:<br>HTML, CSS, JavaScript,</div>
+                    </div>
+                    <div class="mySlides fade">
+                        <div class="Slides_Number">3 / 5</div>
+                        <img class="Slide_Show_Images" src="./css/img/Python.png" alt="image not found" style="width:100%">
+                            <div class="text">the popular programming language Python, </div>
+                    </div>
+                    <div class="mySlides fade">
+                        <div class="Slides_Number">4 / 5</div>
+                        <img class="Slide_Show_Images" src="./css/img/SQL_and_Database.jpg" alt="image not found" style="width:100%">
+                            <div class="text">back end development, databases and SQL.</div>
+                    </div>
+                    <div class="mySlides fade">
+                        <div class="Slides_Number">5 / 5</div>
+                        <img class="Slide_Show_Images" src="./css/img/contact1.jpg" alt="image not found" style="width:100%">
+                            <div class="text">
+                                <a onclick="openForm()" href="#Contact" style="color:white;">Contact me now!</a>
+                            </div>
+                    </div>
+
+                    <a class="Previous" onclick="plusSlides(-1)">&#10094;</a>
+                    <a class="Next" onclick="plusSlides(1)">&#10095</a>
+
+                </div>
+            <br>
+                
+                <div style="text-align:center">
+
+                    <span class="dot" onclick="currentSlide(1)"></span>
+                    <span class="dot" onclick="currentSlide(2)"></span>
+                    <span class="dot" onclick="currentSlide(3)"></span>
+                    <span class="dot" onclick="currentSlide(4)"></span>
+                    <span class="dot" onclick="currentSlide(5)"></span>
+                </div>
+            </div>
+        </div>
+
+        <!--About Section-->
+        <div class="Row" id="About">
+            <div class="Column_2">
+                <a onclick="openForm()" ondblclick="closeForm()"><img class="picture" src="./css/img/jon.jpg" alt="Laptop"></a>
+            </div>
+
+            <div class="Column_1">
+                <h1>About</h1>
+                <p>I am a software developer who is always searching out new challenges!  In my spare time I play bass in a progressive rock band. <br>
+                <br>I am a graduate of <a href="https://www.learncodinganywhere.com" target="_blank">The Tech Academy</a>'s Software Developer Boot Camp.  I am trained and experienced in the following web and programming languages:<br> 
+                <br>HTML, CSS, JavaScript, SQL, Python and more.<br>
+                <br>I'm a full-stack developer ready to work with you!
+                </p>
+            </div>
+        </div>
+
+        <!--GitHub Section-->
+        <div class="Row" id="GitHub">
+            <div class="Column_1">
+                <h1>GitHub</h1>
+                <p>You can view my coding projects on my Github profile here:<br>
+                <center><a href="https://github.com/jonreesecooper/portfolio" target="_blank">Jonathan Cooper's GitHub</a></center></p>
+            </div>
+
+            <div class="Column_2">
+                <a href="https://github.com/jonreesecooper" target="_blank"><img class="picture" src="./css/img/GitHub.png" alt="GitHub"></a>
+            </div>
+        </div>
+
+        <!--Linkedin Section-->
+        <div class="Row" id="Linkedin">
+            <div class="Column_2">
+                <a href="https://www.linkedin.com/in/jonathan-cooper-b173581b4/" target="_blank"><img class="picture" src="./css/img/linkedin.jpg" alt="LinkedIn"></a>
+            </div>
+
+            <div class="Column_1">
+                <h1>LinkedIn</h1>
+                <p>You can view my professional experience on my LinkedIn profile here:<br>
+                <center><a href="https://www.linkedin.com/in/jonathan-cooper-b173581b4/" target="_blank">Jonathan Cooper's LinkedIn</a></center></p>
+            </div>
+        </div>
+
+        <!--Contact Section-->
+        <div id="Contact">
+            <button onclick="openForm()" class="Pop_Up_Button"> CONTACT </button>
+                <div class="form-popup" id="myForm">
+                    <form action="https://formspree.io/jonreesecooper@gmail.com" method="POST" class="form-container">
+                    <h1>Contact</h1>
+                        <label for="name"><b>Name</b></label>
+                            <input type="text" placeholder="Type your name here" name="name" required>
+                        <label for="phone"><b>Phone</b></label>
+                            <input type="text" placeholder="Enter your phone number here" name="phone">
+                        <label for="email"><b>Email</b></label>
+                            <input type="text" placeholder="Type your email address here" name="email" required>
+                        <label for="message"><b>Message</b></label>
+                            <input type="text" placeholder="Type your message here" name="message">
+                        
+                        <button type="submit" class="btn">SUBMIT</button>
+                        <button type="button" class="btn cancel" onclick="closeForm()">CLOSE</button>
+                    </form>
+                </div>
+        </div>
+
+        <!--Footer Section-->
+        <footer>
+            <p>
+                <center>&copy Prosper Consulting Inc.,  <a href="https://learncodinganywhere.com/" target="_blank">The Tech Academy</a></center><br>
+            </p>
+        </footer>
+
+        <script src="JS/portfolio.js"></script>
+    </body>
+</html>
