@@ -1,0 +1,245 @@
+INTRODUCTION
+
+The final step in my education with The Tech Academy was to work on two separate live projects where I worked with fellow students in an Agile work environment.
+In my first project, I used Django to contribute to an application called App Builder 9000.  Within this main application each student was responsible for creating
+their own app which would serve as a searchable/updatable database for a topic of our choosing.  This proved to be an excellent opportunity to improve my debugging 
+skills, as well as researching new python concepts unfamiliar to me.  It was an excellent opportunity to work on an existing project and see how developers contribute
+to active works in progress.  I chose the topic of my favorite show, Rick and Morty.  In the two weeks I completed 7 different stories and I am very happy with my end result.
+
+Below you will find descriptions of the 7 stories I submitted to the App Builder 9000 project.  I have included code snippets to better display my work.
+
+STORIES
+
+Story 1
+
+In this first story I created a new app within the App Builder 900 Django project.  I registered my app in the main app settings.py file, included my urls.py
+file to the main urls.py, and linked my home page to the main home page.  From there I created basic templates for my base.html and home page.  The end-result
+was a viewable home page for my app which could be accessed from the main home page.  Nothing overly complicated, just basic setup of a Django app.
+
+Story 2
+
+In the second story I created a model for my database, a model form to gather information from users, and a template to display the form and
+receive user input.  I then applied styling to keep with the aesthetics of the Rick and Morty cartoon.
+
+ALIGNMENT_CHOICES = [
+    ('Good', 'Good'),
+    ('Evil', 'Evil'),
+    ('Neutral', 'Neutral'),
+]
+
+class Characters(models.Model):
+    name = models.CharField(max_length=60, verbose_name="Character Name")
+    alignment = models.CharField(max_length=10, verbose_name="Character Alignment", choices=ALIGNMENT_CHOICES, null=False)
+    catchPhrase = models.CharField(max_length=150, verbose_name="Character Catch Phrase", default="")
+    image = models.CharField(max_length=300, verbose_name="Image URL", default="")
+    description = models.CharField(max_length=450, verbose_name="Character Description", default="")
+
+    objects = models.Manager()
+
+    def __str__(self):
+        return self.name
+
+class CharacterForm(ModelForm):
+    class Meta:
+        model = Characters
+        fields = ['name', 'alignment', 'catchPhrase', 'image', 'description']
+
+ 
+
+Story 3
+
+In my third story I created a template for an index page where users could search the entries in my database.  If no entries were
+available to view, the page would display information urging them to add an entry to the database.  
+
+def index(request):
+    stats = Characters.objects.all()
+    return render(request, 'RickAndMorty/RickAndMorty_index.html', {'stats': stats})
+
+{% block appcontent %}
+<div class="content">
+    {% if not stats %}
+        <div class="card-deck">
+            <div class="card">
+                <img class="card-img-top" src="../static/images/oops.png" alt="image not found">
+            </div>
+            <div class="card">
+                <div class="card-header">OOPS!</div>
+                <div class="card-body text-dark">
+                    <h1 class="card-text">No entries Found!</h1>
+                    <br>
+                    <h1 class="cart-text">Please add an entry, for Rick's sake!</h1>
+                </div>
+            </div>
+        </div>
+    {% else %}
+    <form name="CharacterForm" method="POST" action="" class="base_form">
+        {% csrf_token %}
+        <div>
+            <label for="menu_id">Select A Characater</label>
+            <select id="menu_id" name="menu" onChange="top.location.href=this.options[this.selectedIndex].value;">
+                <option></option>
+                {% for stat in stats %}
+                <option value="../RickAndMorty/{{ stat.pk }}/RickAndMorty_details">{{ stat.name }}</option>
+                {% endfor %}
+            </select>
+        </div>
+    </form>
+    {% endif %}
+</div>
+
+{% endblock %}
+
+ 
+
+ 
+
+Story 4
+
+I this story I created a details page where the results of the search on the index page would be displayed, using the same bootstrap card
+formatting used to display the error when no database entries could be found.
+
+def details(request, pk):
+    pk = int(pk)
+    character_stats = get_object_or_404(Characters, pk=pk)
+    #print(character_stats)
+    return render(request, 'RickAndMorty/RickAndMorty_details.html', {'character_stats': character_stats})
+{% block appcontent %}
+<div class="content">
+    <div class="base_form">
+        <a href="{% url 'update' pk=character_stats.pk %}"><button class="button1"><strong>Edit</strong></button></a>
+        <a href="{% url 'delete' pk=character_stats.pk %}"><button class="button1"><strong>Delete</strong></button></a>
+    </div>
+    <div class="card-deck">
+        <div class="card">
+            <img class="card-img-top" src="{{character_stats.image}}" alt="image not found">
+        </div>
+        <div class="card">
+            <div class="card-header">{{character_stats.name}}</div>
+            <div class="card-body text-dark">
+                <h1 class="card-title">Alignment:<br>{{character_stats.alignment}}</h1>
+                <h1 class="card-title">Catch Phrase:<br>{{character_stats.catchPhrase}}</h1>
+                <h1 class="cart-title">Description:<br>{{character_stats.description}}</h1>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+
+ 
+
+Story 5
+
+In this story I added an edit and delete function to the details page.  The edit function would display the character form with all current
+values and allow users to make edits.  The delete function called a page confirming the desire to delete the current entry, which would then
+remove the entry from the database.
+
+def update(request, pk):
+    selected_character = {}
+    obj = get_object_or_404(Characters, pk=pk)
+    form = CharacterForm(request.POST or None, instance = obj)
+    if form.is_valid():
+        form.save()
+        return HttpResponseRedirect('RickAndMorty_details')
+    selected_character['form'] = form
+    return render(request, 'RickAndMorty/RickAndMorty_update.html', selected_character)
+def delete(request,pk):
+    delete_character = {}
+    obj = get_object_or_404(Characters, pk=pk)
+    if request.method == "POST":
+        obj.delete()
+        return HttpResponseRedirect('/RickAndMorty/rick_index')
+    return render(request, "RickAndMorty/RickAndMorty_delete.html", delete_character)
+
+ 
+
+Story 6
+	
+This was hands down the most difficult story, as it required me to research concepts unfamiliar to me in my education.  I created a page where users could search
+for any character by name, which would then run a query to an existing Rick and Morty API, and return specific values to be displayed on the page.  If no entries
+were found in the API, an error page would display.
+
+def api_search(request):
+    character_list = []
+    character_data = {}
+    if request.method == 'POST':
+        results = request.POST.get('character_search', None)
+        payload = {'name': results}
+        r = requests.get('https://rickandmortyapi.com/api/character/', params=payload)
+        if r:
+            print(r.url)
+            character_data = r.json()
+            print(json.dumps(character_data, indent = 1))
+            #print(character_data['results'][0]['name'])
+            character_results = {
+                # pulling the elements of 'name', 'species', 'gender'
+                # 'status', 'image', 'origin', and 'location'
+                'name': character_data['results'][0]['name'],
+                'species': character_data['results'][0]['species'],
+                'gender': character_data['results'][0]['gender'],
+                'status': character_data['results'][0]['status'],
+                'image': character_data['results'][0]['image'],
+                'origin': character_data['results'][0]['origin']['name'],
+                'location': character_data['results'][0]['location']['name']
+            }
+            character_list.append(character_results)
+            print(character_list)
+            context = {"character_list": character_list}
+            return render(request, 'RickAndMorty/RickAndMorty_api_search.html', context)
+
+        else:
+            return redirect('oops')
+
+    return render(request, 'RickAndMorty/RickAndMorty_api_search.html')
+
+ 
+
+Story 7
+
+In this story I once again was required to research new concepts.  I leveraged data scraping using BeautifulSoup to pull biography information
+for main characters from fandom.com to display on my page.  Users simply select a character from the drop-down menu, and the bio displays.  I 
+ran into a little difficulty displaying the biography for Rick, as his page was formatted a little differently.  That was solved with a quick if
+statement, changing which paragraph tags I was searching for.
+
+def bs_search(request):
+    total = []
+    if request.method == 'POST':
+        results = request.POST.get('character_bio')
+        print(results)
+
+        if results:
+            page = requests.get('https://rickandmorty.fandom.com/wiki/' + results)
+            soup = BeautifulSoup(page.content, 'html.parser')
+            if results == 'Rick_Sanchez':
+                bio1 = soup.find_all('p')[3]
+                bio_text1 = bio1.get_text()
+                bio2 = soup.find_all('p')[4]
+                bio_text2 = bio2.get_text()
+                bio3 = soup.find_all('p')[5]
+                bio_text3 = bio3.get_text()
+            else:
+                bio1 = soup.find_all('p')[1]
+                bio_text1 = bio1.get_text()
+                bio2 = soup.find_all('p')[2]
+                bio_text2 = bio2.get_text()
+                bio3 = soup.find_all('p')[3]
+                bio_text3 = bio3.get_text()
+
+            image = soup.find_all('img')[1]
+            image_src = image.get('src')
+            print(image_src)
+            data_scrape = {
+                'bio_text1': bio_text1,
+                'bio_text2': bio_text2,
+                'bio_text3': bio_text3,
+                'image_src': image_src
+            }
+            print(data_scrape)
+            total.append(data_scrape)
+            context = {'total': total}
+            return render(request, 'RickAndMorty/RickAndMorty_bs.html', context)
+
+    return render(request, 'RickAndMorty/RickAndMorty_bs.html')
+
+ 
+
