@@ -1,0 +1,306 @@
+INTRODUCTION
+
+For the final two weeks of my coursework at the Tech Academy, I worked with a group of fellow classmates on a .NET Framework MVC Code First Web Application
+for a small theatre in Portland, OR that would allow them to update the site themselves without need of any IT or programming staff.  
+Working on this project gave me the ability to really fine tune my skillset with C# and learn how to complete tasks not covered in my coursework, 
+as well as how to better research aspects of MVC frameworks that I was less familiar with.  I also managed to get a better feel for how a team of developers
+work together in DevOps environments, creating functional deliverables under time constraints.  Below are descriptions of my completed stories, including 
+code snippets.
+
+SHOW CAST MEMBER & SPONSOR PHOTO DEPENDENCIES
+
+On the modals designed for deletion of photos for cast members, sponsors and productions there was a need to display what photo dependencies existed for the
+photo to be deleted.  Dependencies were already declared within the controller, so it was merely a matter of properly displaying them on the cshtml file, 
+which was accomplished with the following code:
+
+@if (!dependencies.HasDependencies)
+    {
+      <dt>
+        No dependencies exist with this photo: Safe to delete
+      </dt>
+    }
+    else
+    {
+      <dt>
+        This photo is being used by the following items:
+      </dt>
+
+      <dd>
+@* Foreach production in the dependencies.ProductionPhotos List, get the title and season of each 
+production. *@
+        @foreach (var production in dependencies.ProductionPhotos)
+        {
+          @production.Title; <text> - Season: </text>
+          @production.Production.Season; <br />
+        }
+
+        @* Foreach sponsor in the dependencies.Sponsors List, get the name of each sponsor. *@
+        @foreach (var sponsor in dependencies.Sponsors)
+        {
+          @sponsor.Name <br />
+        }
+
+        @*Foreach castmember in the dependencies.CastMembers List, get the name of each cast member. *@
+        @foreach (var castmember in dependencies.CastMembers)
+        {
+          <text> - Cast Member: </text>
+          @castmember.Name
+        }
+      </dd>
+    } 
+
+SEED DISPLAY INFO
+
+A new model had been created for display info, which would allow site administrators to update text content on various pages without needing to write any additional code.
+I was tasked with seeding the first entry into the corresponding database within the Startup.cs file and leveraging it on the Archive page of the site.  I first created
+my seed method:
+
+protected void SeedDisplayInfo()
+        {
+            var topcontent = new displayinfo();
+            topcontent.title = "archive page-title";
+            topcontent.textcontent = "theatre vertigo archive";
+
+            var history = new displayinfo();
+            history.title = "history";
+            history.textcontent = "in 1997, theatre vertigo was founded by paul floding, " +
+                "nanette pettit and jeff meyers.  since then, theatre vertigo has performed " +
+                "in numerous spaces including the russell street theater, the electric company," +
+                " theater!theatre!, and their current home, the shoebox theater.  from 2003 to " +
+                "2014, theatre vertigo produced anonymous theatre as a summer fundraiser in " +
+                "collaboration with the anonymous theatre company.other past collaborations include " +
+                "defunkt theatre, stark raving theater,and tears of joy theatre.  \n\ntheatre vertigo " +
+                "has worked on world premieres including faust.us by joseph fisher, 99 ways to " +
+                "fuck a swan by kim rosenstock, and the end of sex by craig jessen.  in 2016, theatre " +
+                "vertigo produced its first officially commissioned work from a playwright, i want to " +
+                "destroy you, by rob handel.";
+            
+
+                       context.displayinfo.addorupdate(d => new { d.title, d.textcontent }, topcontent, history,
+ 		                        mission);
+      }
+
+The next step was to access the DisplayInfo within the ActionResult for the Archive page so it could be properly accessed by the view:
+ 
+public ActionResult Archive()
+        {
+            var db = new ApplicationDbContext();
+            var displayinfo = db.DisplayInfo.Where(x => x.Title.Contains("Archive Page"));
+            string archiveTitle = displayinfo.Where(x => x.Title == "Archive Page-
+                  title").FirstOrDefault().TextContent;
+            string archiveSubtitle = displayinfo.Where(x => x.Title == "Archive Page-
+                  content").FirstOrDefault().TextContent;
+            ViewData["maintitle"] = archiveTitle;
+            ViewData["subtitle"] = archiveSubtitle;
+            var productions = db.Productions
+                .Include(i => i.DefaultPhoto);
+            return View(productions.ToList());
+        }
+
+Once the ViewData was properly accessed in the Archive.cshtml file, the seeded table entries were properly listed on the site's Archive page.
+ 
+
+BUTTON FOR PRODUCTIONS EDIT PAGE: “ADD PRODUCTION PHOTO”
+
+The edit page for productions lacked the ability to add a production photo if none existed.  This particular story entailed displaying a message on the
+edit page when no production photo existed, accompanied by a button that would open a modal to add a production photo.  Once the display message and button
+were created, the first big task was creating the modal for adding a photo:
+
+<!--Add Photo Modal-->
+<div id="addProdPhoto" class="modal fade" role="dialog">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-body">
+        @using (Html.BeginForm("AddProductionPhoto", "Productions", FormMethod.Post, new { enctype = 
+              "multipart/form-data" }))
+        {
+          @Html.AntiForgeryToken()
+          <div class="AddProductionPhotoModalContainer">
+            <div>
+              <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="form-horizontal">
+              <div class="inputBox2">
+                @Html.ValidationSummary(false, "", new { @class = "text-danger" })
+                <div class="inputBox2">
+                  @Html.ValidationSummary(false, "", new { @class = "text-danger" })
+                  <div class="form-group">
+                    @Html.DisplayNameFor(model => model.ProductionPhotos.First().Production): 
+                    @Html.DisplayFor(model => model.Title)
+                    <div class="col-md-10 formBox">
+                      @Html.HiddenFor(model => model.ProductionId)
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    @Html.LabelFor(model => model.ProductionPhotos.First().PhotoId, htmlAttributes: new { 
+                          @class = "control-label col-md-4 inputLabel" })
+                    <div class="col-md-10 formBox">
+                      <input type="file" name="file" required />
+                      @Html.ValidationMessageFor(model => model.ProductionPhotos.First().PhotoId, "", new 
+                          { @class = "text-danger" })
+                    </div>
+                  </div>
+
+                  <div class="form-group">
+                    @Html.LabelFor(model => model.Title, htmlAttributes: new { @class = "control-label 
+                        col-md-4 inputLabel" })
+                    <div class="col-md-10 formBox">
+                      @Html.EditorFor(model => model.Title, new { htmlAttributes = new { @class = "form-
+                            control" } })
+                      @Html.ValidationMessageFor(model => model.Title, "", new { @class = "text-danger" })
+                    </div>
+                  </div>
+
+                  <div class="form-group">
+                    @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "control-
+                          label col-md-4 inputLabel" })
+                    <div class="col-md-10 formBox">
+                      @Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = 
+                            "form-control" } })
+                      @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-
+                            danger" })
+                    </div>
+                  </div>
+
+                  <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10 formBox">
+                      <input type="submit" value="Create" class="btn btn-main" />
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+
+          </div>
+        }
+      </div>
+    </div>
+  </div>
+</div>
+<!--END ADD PHOTO MODAL-->
+
+The next step was to create a method within the productions controller to handle the modal.
+
+[HttpPost]
+[ValidateAntiForgeryToken]
+public ActionResult AddProductionPhoto([Bind(Include = "Title,Description")] ProductionPhotos 
+productionPhotos, HttpPostedFileBase file, int productionId)
+{
+    productionPhotos.PhotoId = PhotoController.CreatePhoto(file, productionPhotos.Title);
+    if (ModelState.IsValid)
+    {
+        Production production = db.Productions.Find(productionId);
+        productionPhotos.Production = production;
+        if (production.DefaultPhoto == null)
+        {
+            production.DefaultPhoto = productionPhotos;
+        }
+
+        db.ProductionPhotos.Add(productionPhotos);
+        db.SaveChanges();
+        return RedirectToAction("Index");
+    }
+    return View("Edit");
+}
+The end result was a modal that would allow administrators to select a photo file from their local device, and add it to the production as the default photo.
+ 
+ 
+
+MODELS MISSING PHOTOS FUNCTIONALITY
+
+In a situation where a particular model had no photo associated with it, a method obtain those models so that later work could be done to them.  This was
+a matter of creating a public method within the Admin Controller that searched the various models and returned any instances where the photoId was either 
+null or set to the default “photo unavailable” picture:
+
+public static ModelsWithoutPhotos FindModelsNoPics()
+{
+    var admin = new AdminController();
+    int photoUnavailable = admin.db.Photo.Where(p => p.Title == "Photo Unavailable").Select(p => 
+        p.PhotoId).FirstOrDefault();
+    ModelsWithoutPhotos modelsWithNoPics = new ModelsWithoutPhotos
+    {
+        CastMembers = admin.db.CastMembers.Where(p => p.PhotoId == null || p.PhotoId == 
+            photoUnavailable).OrderBy(p => p.CastMemberID).
+        Select(p => p.CastMemberID).ToList(),
+
+        Productions = admin.db.Productions.Where(p => p.DefaultPhoto == null || p.DefaultPhoto.PhotoId == 
+            photoUnavailable).
+        OrderBy(p => p.ProductionId).Select(p => p.ProductionId).ToList(),
+
+        ProductionPhotos = admin.db.ProductionPhotos.Where(p => p.PhotoId == null || p.PhotoId == 
+            photoUnavailable && p.Production != null).OrderBy(p => p.ProPhotoId).Select(p => p.ProPhotoId).ToList(),
+
+        Sponsors = admin.db.Sponsors.Where(p => p.PhotoId == null || p.PhotoId == 
+                photoUnavailable).OrderBy(p => p.SponsorId).
+                Select(p => p.SponsorId).ToList()
+    };
+
+    return modelsWithNoPics;
+}
+
+AWARD INDEX SEARCH BAR
+
+A search bar and refresh button had been created on the page listing all awards for the theatre, but no functionality had been provided.  
+The task at had was to filter displayed results based on text entered into the search bar, hiding all others, and then display all awards
+when the refresh button was clicked.  This was handled with some jQuery script at the bottom of the corresponding cshtml file:
+
+<script>
+  $(document).ready(function() {
+    $("#searchFilter").on("keyup", function() {
+      var searchText = $(this).val().toLowerCase();
+      $("#awardTable tr").filter(function() {
+        $(this).toggle($(this).text().toLowerCase().indexOf(searchText) > -1)
+      });
+    });
+    $('#clearSearch').click(function () {
+      $("#searchFilter").val("");
+      $("#searchFilter").trigger("keyup")
+    });
+  });
+</script>
+
+NEW USER ROLE
+
+The site was set up so that when an account was created, the user was automatically given a role of “Member” which relates to
+cast members of the theatre.  They have access to parts of the site that regular users shouldn’t, so a new role of “User” was
+to be created and set as the default role for new account registration.  The first step was to create the role of User and an 
+instance of a registration with that role within the previously created private createRolesAndUsers method in the Startup.cs file.
+
+if (!roleManager.RoleExists("User"))
+{
+    var role = new Microsoft.AspNet.Identity.EntityFramework.IdentityRole();
+    role.Name = "User";
+    roleManager.Create(role);
+
+    var user = new ApplicationUser();
+    user.UserName = "schwifty";
+    user.FirstName = "Rick";
+    user.LastName = "Sanchez";
+    user.Email = "wubbalubbbadubdub@gmail.com";
+    user.StreetAddress = "123 Smith Ave";
+    user.City = "Rickland";
+    user.State = "WA";
+    user.ZipCode = "98101";
+    user.Role = "User";
+
+    string userPWD = "!Squanchie12";
+
+    var chkUser = userManager.Create(user, userPWD);
+    if (chkUser.Succeeded)
+    {
+        var result1 = userManager.AddToRole(user.Id, "User");
+    }
+}
+
+From there it was just a matter of updating the Role property within the IdentityUser class from “Member” to “User” so that
+all new instances would have the default role desired.
+
+public string Role { get; set; } = "User";   
+
+OTHER SKILLS LEARNED
+-	Working as part of a team of developers, collaborating where needed when stories were codependent.
+-	Contributing to an active project with templates and naming methods already established.
+-	Learning new efficiencies from instructors by asking questions and observing their logic.
+-	Troubleshooting problems and debugging code.
+
